@@ -73,5 +73,12 @@ def save_model(model, filename):
 
 def load_model(filename):
     path = os.path.join(MODEL_DIR, filename)
-    model = torch.load(path)
+
+    # 모델 파라미터 load
+    model = get_cs_flow_model()
+    model.load_state_dict(torch.load(path))
+
+    # 전체 모델 load
+    # model = torch.load(path)
+
     return model
