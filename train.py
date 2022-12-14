@@ -65,7 +65,13 @@ def train(train_loader, test_loader):
                 loss = get_loss(z, jac)
 
                 z_concat = t2np(concat_maps(z))
-                score = np.mean(z_concat ** 2 / 2, axis=(1, 2))
+                
+                # anomaly score ( standard deviation )
+                score = np.std(z_concat ** 2 / 2, axis=(1, 2))
+
+                # anomaly score ( mean )
+                # score = np.mean(z_concat ** 2 / 2, axis=(1, 2))
+
                 test_z.append(score)
                 test_loss.append(t2np(loss))
                 test_labels.append(t2np(labels))

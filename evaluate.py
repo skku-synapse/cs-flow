@@ -166,7 +166,13 @@ def evaluate(model, test_loader):
             z = model(inputs)
 
             z_concat = t2np(concat_maps(z))
-            nll_score = np.mean(z_concat ** 2 / 2, axis=(1, 2))
+
+            # anomaly score ( standard deviation )
+            nll_score = np.std(z_concat ** 2 / 2, axis=(1, 2))
+
+            # anomaly score ( mean )
+            # nll_score = np.mean(z_concat ** 2 / 2, axis=(1, 2))
+
             anomaly_score.append(nll_score)
             test_labels.append(t2np(labels))
 
