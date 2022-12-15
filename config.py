@@ -10,7 +10,7 @@ class_name = "dummy_data"  # dataset subdirectory
 modelname = "dummy_test"  # export evaluations/logs with this name
 pre_extracted = True  # were feature preextracted with extract_features?
 
-img_size = (768, 768)  # image size of highest scale, others are //2, //4
+img_size = (512, 512)  # image size of highest scale, others are //2, //4
 assert img_size[0] % 128 == 0 and img_size[1] % 128 == 0, "image width/height should be a multiple of 128"
 
 img_dims = [3] + list(img_size)
@@ -22,8 +22,8 @@ norm_mean, norm_std = [0.485, 0.456, 0.406], [0.229, 0.224, 0.225]
 n_scales = 3  # number of scales at which features are extracted, img_size is the highest - others are //2, //4,...
 clamp = 3  # clamping parameter
 max_grad_norm = 1e0  # clamp gradients to this norm
-n_coupling_blocks = 4  # higher = more flexible = more unstable
-fc_internal = 1024  # * 4 # number of neurons in hidden layers of s-t-networks
+n_coupling_blocks = 1  # higher = more flexible = more unstable
+fc_internal = 512  # * 4 # number of neurons in hidden layers of s-t-networks
 lr_init = 2e-4  # inital learning rate
 use_gamma = True
 
@@ -37,8 +37,8 @@ kernel_sizes = [3] * (n_coupling_blocks - 1) + [5]
 
 # total epochs = meta_epochs * sub_epochs
 # evaluation after <sub_epochs> epochs
-meta_epochs = 4  # total epochs = meta_epochs * sub_epochs
-sub_epochs = 60  # evaluate after this number of epochs
+meta_epochs = 50  # total epochs = meta_epochs * sub_epochs
+sub_epochs = 10  # evaluate after this number of epochs
 
 # output settings
 verbose = True
