@@ -1,6 +1,6 @@
 # CS-Flow
 
-This is the code to the WACV 2022 paper "[Fully Convolutional Cross-Scale-Flows for Image-based Defect Detection](https://arxiv.org/pdf/2110.02855.pdf)" by Marco Rudolph, Tom Wehrbein, Bodo Rosenhahn and Bastian Wandt.
+CS-Flow 논문 : WACV 2022 paper "[Fully Convolutional Cross-Scale-Flows for Image-based Defect Detection](https://arxiv.org/pdf/2110.02855.pdf)" by Marco Rudolph, Tom Wehrbein, Bodo Rosenhahn and Bastian Wandt.
 
 ## 1. CS-Flow Official Document
 
@@ -99,13 +99,21 @@ This project is licensed under the MIT License.
 
 ### 2-3) configuration file 변경
 
-이미지 사이즈: 768x768 -> 512x512 ( 가장 큰 스케일 기준 )  
-coupling block 수: 4 -> 1  
-hidden layer channel 수 (fc_internal): 1024 -> 512  
+| 변수명            | 설명                                                         | 기존 값    | 변경된 값  |
+| ----------------- | ------------------------------------------------------------ | ---------- | ---------- |
+| img_size          | 가장 큰 스케일 기준 이미지 사이즈                            | (768, 768) | (512, 512) |
+| n_coupling_blocks | normalizing flow의 반복되는 coupling block 수                | 4          | 1          |
+| fc_internal       | cross scale convolution channel 수 (hidden layer channel 수) | 1024       | 512        |
+
 참고 파일: config.py
 
 ## 3. hyper-parameters
 
-batch size: 16  
-learning rate: 2e-4  
-epochs: 500 ~ 1000
+| 변수명      | 설명                           | 값     |
+| ----------- | ------------------------------ | ------ |
+| batch_size  | batch size                     | 16     |
+| lr_init     | learning rate                  | 2e-4   |
+| sub_epochs  | 1 sub_epoch 마다 evaluate 진행 | 10     |
+| meta_epochs | sub epochs 반복 횟수           | 50~100 |
+
+참고 파일: config.py
