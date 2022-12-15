@@ -1,9 +1,13 @@
 # CS-Flow
 
-This is the code to the WACV 2022 paper "[Fully Convolutional Cross-Scale-Flows for Image-based Defect Detection](
-https://arxiv.org/pdf/2110.02855.pdf)" by Marco Rudolph, Tom Wehrbein, Bodo Rosenhahn and Bastian Wandt.
+This is the code to the WACV 2022 paper "[Fully Convolutional Cross-Scale-Flows for Image-based Defect Detection](https://arxiv.org/pdf/2110.02855.pdf)" by Marco Rudolph, Tom Wehrbein, Bodo Rosenhahn and Bastian Wandt.
 
-## Getting Started
+## 1. CS-Flow Official Document
+
+CS-Flow의 공식 document 입니다.  
+환경 세팅 방법, 데이터 세팅 방법, 코드 실행 방법 등이 설명되어 있습니다.
+
+### 1-1) Getting Started
 
 You will need [Python 3.6](https://www.python.org/downloads) and the packages specified in _requirements.txt_.
 We recommend setting up a [virtual environment with pip](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
@@ -15,21 +19,21 @@ Install packages with:
 $ pip install -r requirements.txt
 ```
 
-## Configure and Run
+### 1-2) Configure and Run
 
 All configurations concerning data, model, training, visualization etc. can be made in _config.py_. The default configuration will run a training with paper-given parameters on the provided dummy dataset. This dataset contains images of 4 squares as normal examples and 4 circles as anomaly.
 
-To extract features, run extract_features.py (this was already done here for the dummy dataset, features were extracted to data/features).
-To start the training, just run _main.py_!
+To extract features, run extract*features.py (this was already done here for the dummy dataset, features were extracted to data/features).
+To start the training, just run \_main.py*!
 Please report us if you have issues when using the code.
 
-## Data
+### 1-3) Data
 
 The given dummy dataset shows how the implementation expects the construction of a dataset. Coincidentally, the [MVTec AD dataset](https://www.mvtec.com/company/research/datasets/mvtec-ad) is constructed in this way.
 
 Set the variables _dataset_path_ and _class_name_ in _config.py_ to run experiments on a dataset of your choice. The expected structure of the data is as follows:
 
-``` 
+```
 train data:
 
         dataset_path/class_name/train/good/any_filename.png
@@ -58,14 +62,14 @@ test data:
         dataset_path/class_name/test/curved/wont_make_a_difference_if_you_put_all_anomalies_in_one_class.png
         dataset_path/class_name/test/curved/but_this_code_is_practicable_for_the_mvtec_dataset.png
         [...]
-``` 
+```
 
-## Credits
+### 1-4) Credits
 
 Some code of an old version of the [FrEIA framework](https://github.com/VLL-HD/FrEIA) was used for the implementation of Normalizing Flows. Follow [their tutorial](https://github.com/VLL-HD/FrEIA) if you need more documentation about it.
 
+### 1-5) Citation
 
-## Citation
 Please cite our paper in your publications if it helps your research. Even if it does not, you are welcome to cite us.
 
         @inproceedings { RudWeh2022,
@@ -77,7 +81,31 @@ Please cite our paper in your publications if it helps your research. Even if it
         month = jan
         }
 
-        
-## License
+### 1-6) License
 
 This project is licensed under the MIT License.
+
+## 2. 변경 사항
+
+### 2-1) Anomaly Score 산출 방식 변경
+
+평균 -> 표준편차 변경  
+참고 파일: evaluate.py, train.py
+
+### 2-2) 모델 저장 및 불러오기 방식 변경
+
+전체 모델 저장 -> 모델 파라미터만 저장  
+참고 파일: model.py, train.py
+
+### 2-3) configuration file 변경
+
+이미지 사이즈: 768x768 -> 512x512 ( 가장 큰 스케일 기준 )  
+coupling block 수: 4 -> 1  
+hidden layer channel 수 (fc_internal): 1024 -> 512  
+참고 파일: config.py
+
+## 3. hyper-parameters
+
+batch size: 16  
+learning rate: 2e-4  
+epochs: 500 ~ 1000
