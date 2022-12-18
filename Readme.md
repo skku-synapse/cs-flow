@@ -89,13 +89,36 @@ This project is licensed under the MIT License.
 
 ### 2-1) Anomaly Score 산출 방식 변경
 
-평균 -> 표준편차 변경  
-참고 파일: [evaluate.py](https://github.com/skku-synapse/cs-flow/blob/main/evaluate.py), [train.py](https://github.com/skku-synapse/cs-flow/blob/main/train.py)
+평균 -> 표준편차
+
+```
+# line 171 in evaluate.py
+nll_score = np.std(z_concat ** 2 / 2, axis=(1, 2))
+```
+
+```
+# line 70 in train.py
+score = np.std(z_concat ** 2 / 2, axis=(1, 2))
+```
+
+참고 파일: [evaluate.py](https://github.com/skku-synapse/cs-flow/blob/afd9bfa58ee29e475b9f618969d08bf66fb444aa/evaluate.py#L170-L174), [train.py](https://github.com/skku-synapse/cs-flow/blob/afd9bfa58ee29e475b9f618969d08bf66fb444aa/train.py#L69-L73)
 
 ### 2-2) 모델 저장 및 불러오기 방식 변경
 
-전체 모델 저장 -> 모델 파라미터만 저장  
-참고 파일: [model.py](https://github.com/skku-synapse/cs-flow/blob/main/model.py), [train.py](https://github.com/skku-synapse/cs-flow/blob/main/train.py)
+전체 모델 저장 -> 모델 파라미터만 저장
+
+```
+# line 97 in train.py
+save_model(model.state_dict(), c.modelname)
+```
+
+```
+# line 78 in model.py
+model = get_cs_flow_model()
+model.load_state_dict(torch.load(path))
+```
+
+참고 파일: [train.py](https://github.com/skku-synapse/cs-flow/blob/afd9bfa58ee29e475b9f618969d08bf66fb444aa/train.py#L93-L97), [model.py](https://github.com/skku-synapse/cs-flow/blob/afd9bfa58ee29e475b9f618969d08bf66fb444aa/model.py#L77-L82)
 
 ### 2-3) configuration file 변경
 
@@ -122,13 +145,14 @@ This project is licensed under the MIT License.
 
 ### 4-1) 적용 기법
 
-Random Crop 기법을 적용하여 학습 데이터 증강
-
-참고 파일: [utils.py](https://github.com/skku-synapse/cs-flow/blob/main/utils.py)
+**Random Crop**  
+: 이미지를 일정한 크기로 랜덤하게 잘라 데이터를 증강시키는 기법
 
 ### 4-2) 적용 방법
 
-utils.py에서 데이터 전처리 부분
+SMT 데이터셋 raw 이미지(2560x1750)를 대상으로 Random Crop 진행
+
+**기존 데이터 전처리** ([utils.py의 line 94-98](https://github.com/skku-synapse/cs-flow/blob/afd9bfa58ee29e475b9f618969d08bf66fb444aa/utils.py#L94-L98))
 
 ```
 tfs = [transforms.Resize(c.img_size), transforms.ToTensor(), transforms.Normalize(c.norm_mean, c.norm_std)]
@@ -136,10 +160,9 @@ transform_train = transforms.Compose(tfs)
 
 trainset = ImageFolder(data_dir_train, transform=transform_train)
 testset = ImageFolder(data_dir_test, transform=transform_train, target_transform=target_transform)
-
 ```
 
-Data Augmentation을 진행할 때, train 데이터에 Augmentation을 추가하여 증강시키므로 train 데이터와 test 데이터를 구분지어 전처리 진행
+**Data Augmentation를 위한 데이터 전처리**
 
 ```
 train_tfs = [transforms.Resize(c.img_size), transforms.ToTensor(), transforms.Normalize(c.norm_mean, c.norm_std), transforms.RandomCrop((512,512))]
@@ -149,7 +172,9 @@ transform_test = transforms.Compose(test_tfs)
 
 trainset = ImageFolder(data_dir_train, transform=transform_traain)
 testset = ImageFolder(data_dir_test, transform=transform_test, target_transform=target_transform)
-
 ```
 
-참고 파일: [utils.py](https://github.com/skku-synapse/cs-flow/blob/main/utils.py)
+- Data Augmentation을 진행할 때, train 데이터에 Augmentation을 추가하여 증강시키므로 train 데이터와 test 데이터를 구분지어 전처리 진행
+- train 데이터 전처리에 `transforms.RandomCrop((512, 512))`을 삽입
+
+참고 파일: [utils.py](https://github.com/skku-synapse/cs-flow/blob/afd9bfa58ee29e475b9f618969d08bf66fb444aa/utils.py#L94-L98)
