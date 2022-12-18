@@ -120,8 +120,14 @@ This project is licensed under the MIT License.
 
 ## 4. Data Augmentation
 
-Train Dataset에 Random Crop기법 적용하여 증강
-utils.py:
+### 4-1) 적용 기법
+
+Random Crop 기법을 적용하여 학습 데이터 증강
+참고 파일: [utils.py](https://github.com/skku-synapse/cs-flow/blob/main/utils.py)
+
+### 4-2) 적용 방법
+
+utils.py에서 데이터 전처리 부분
 
 ```
 tfs = [transforms.Resize(c.img_size), transforms.ToTensor(), transforms.Normalize(c.norm_mean, c.norm_std)]
@@ -132,7 +138,7 @@ testset = ImageFolder(data_dir_test, transform=transform_train, target_transform
 
 ```
 
-Data Augmentation 적용 시:
+Data Augmentation을 진행할 때, train 데이터에 Augmentation을 추가하여 증강시키므로 train 데이터와 test 데이터를 구분지어 전처리 진행
 
 ```
 train_tfs = [transforms.Resize(c.img_size), transforms.ToTensor(), transforms.Normalize(c.norm_mean, c.norm_std), transforms.RandomCrop((512,512))]
@@ -140,9 +146,9 @@ test_tfs = [transforms.Resize(c.img_size), transforms.ToTensor(), transforms.Nor
 transform_train = transforms.Compose(train_tfs)
 transform_test = transforms.Compose(test_tfs)
 
-trainset = ImageFolder(data_dir_train, transform=transform_train)
+trainset = ImageFolder(data_dir_train, transform=transform_traain)
 testset = ImageFolder(data_dir_test, transform=transform_test, target_transform=target_transform)
 
 ```
 
-참고 파일: [utils.py]((https://github.com/skku-synapse/cs-flow/blob/main/utils.py))
+참고 파일: [utils.py](https://github.com/skku-synapse/cs-flow/blob/main/utils.py)
