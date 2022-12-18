@@ -120,8 +120,6 @@ This project is licensed under the MIT License.
 
 ## 4. Data Augmentation
 
-학습데이터에 Random Crop 적용한 데이터를 추가할 때 성능이 좋아진 것으로 확인됨
-
 utils.py:
 
 ```
