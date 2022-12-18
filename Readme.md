@@ -90,12 +90,12 @@ This project is licensed under the MIT License.
 ### 2-1) Anomaly Score 산출 방식 변경
 
 평균 -> 표준편차 변경  
-참고 파일: evaluate.py, train.py
+참고 파일: [evaluate.py](https://github.com/skku-synapse/cs-flow/blob/main/evaluate.py), [train.py](https://github.com/skku-synapse/cs-flow/blob/main/train.py)
 
 ### 2-2) 모델 저장 및 불러오기 방식 변경
 
 전체 모델 저장 -> 모델 파라미터만 저장  
-참고 파일: model.py, train.py
+참고 파일: [model.py](https://github.com/skku-synapse/cs-flow/blob/main/model.py), [train.py](https://github.com/skku-synapse/cs-flow/blob/main/train.py)
 
 ### 2-3) configuration file 변경
 
