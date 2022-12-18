@@ -146,4 +146,4 @@ testset = ImageFolder(data_dir_test, transform=transform_test, target_transform=
 
 ```
 
-참고 파일: [utils.py](https://utils.py/)
+참고 파일: [utils.py]((https://github.com/skku-synapse/cs-flow/blob/main/utils.py))
