@@ -105,7 +105,7 @@ This project is licensed under the MIT License.
 | n_coupling_blocks | normalizing flow의 반복되는 coupling block 수                | 4          | 1          |
 | fc_internal       | cross scale convolution channel 수 (hidden layer channel 수) | 1024       | 512        |
 
-참고 파일: config.py
+참고 파일: [config.py](https://github.com/skku-synapse/cs-flow/blob/main/config.py)
 
 ## 3. hyper-parameters
 
@@ -116,7 +116,7 @@ This project is licensed under the MIT License.
 | sub_epochs  | 1 sub_epoch 마다 evaluate 진행 | 10     |
 | meta_epochs | sub epochs 반복 횟수           | 50~100 |
 
-참고 파일: config.py
+참고 파일: [config.py](https://github.com/skku-synapse/cs-flow/blob/main/config.py)
 
 ## 4. Data Augmentation
 
