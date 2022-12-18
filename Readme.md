@@ -120,6 +120,7 @@ This project is licensed under the MIT License.
 
 ## 4. Data Augmentation
 
+Train Dataset에 Random Crop기법 적용하여 증강
 utils.py:
 
 ```
