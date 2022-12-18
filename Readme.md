@@ -117,3 +117,33 @@ This project is licensed under the MIT License.
 | meta_epochs | sub epochs 반복 횟수           | 50~100 |
 
 참고 파일: config.py
+
+## 4. Data Augmentation
+
+학습데이터에 Random Crop 적용한 데이터를 추가할 때 성능이 좋아진 것으로 확인됨
+
+utils.py:
+
+```
+tfs = [transforms.Resize(c.img_size), transforms.ToTensor(), transforms.Normalize(c.norm_mean, c.norm_std)]
+transform_train = transforms.Compose(tfs)
+
+trainset = ImageFolder(data_dir_train, transform=transform_train)
+testset = ImageFolder(data_dir_test, transform=transform_train, target_transform=target_transform)
+
+```
+
+Data Augmentation 적용 시:
+
+```
+train_tfs = [transforms.Resize(c.img_size), transforms.ToTensor(), transforms.Normalize(c.norm_mean, c.norm_std), transforms.RandomCrop((512,512))]
+test_tfs = [transforms.Resize(c.img_size), transforms.ToTensor(), transforms.Normalize(c.norm_mean, c.norm_std)]
+transform_train = transforms.Compose(train_tfs)
+transform_test = transforms.Compose(test_tfs)
+
+trainset = ImageFolder(data_dir_train, transform=transform_traain)
+testset = ImageFolder(data_dir_test, transform=transform_test, target_transform=target_transform)
+
+```
+
+참고 파일: [utils.py](https://utils.py/)
