@@ -139,7 +139,7 @@ test_tfs = [transforms.Resize(c.img_size), transforms.ToTensor(), transforms.Nor
 transform_train = transforms.Compose(train_tfs)
 transform_test = transforms.Compose(test_tfs)
 
-trainset = ImageFolder(data_dir_train, transform=transform_traain)
+trainset = ImageFolder(data_dir_train, transform=transform_train)
 testset = ImageFolder(data_dir_test, transform=transform_test, target_transform=target_transform)
 
 ```
