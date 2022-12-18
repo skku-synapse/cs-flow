@@ -123,6 +123,8 @@ This project is licensed under the MIT License.
 ### 4-1) 적용 기법
 
 Random Crop 기법을 적용하여 학습 데이터 증강
+
+```
 참고 파일: [utils.py](https://github.com/skku-synapse/cs-flow/blob/main/utils.py)
 
 ### 4-2) 적용 방법
