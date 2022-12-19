@@ -64,6 +64,26 @@ test data:
         [...]
 ```
 
+**데이터셋 구조 예시**
+
+```
+cs-flow
+└── data
+    └── images
+        └── lens
+            ├── train
+            │   └── good
+            │       ├── train1.jpg
+            │       └── ...
+            └── test
+                ├── good
+                │   ├── good1.jpg
+                │   └── ...
+                └── ng
+                    ├── ng1.jpg
+                    └── ...
+```
+
 ### 1-4) Credits
 
 Some code of an old version of the [FrEIA framework](https://github.com/VLL-HD/FrEIA) was used for the implementation of Normalizing Flows. Follow [their tutorial](https://github.com/VLL-HD/FrEIA) if you need more documentation about it.
