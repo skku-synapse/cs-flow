@@ -1,13 +1,13 @@
-# CS-Flow
+# 1. CS-Flow
 
 CS-Flow 논문 : WACV 2022 paper "[Fully Convolutional Cross-Scale-Flows for Image-based Defect Detection](https://arxiv.org/pdf/2110.02855.pdf)" by Marco Rudolph, Tom Wehrbein, Bodo Rosenhahn and Bastian Wandt.
 
-## 1. CS-Flow Official Document
+## 1-1. CS-Flow Official Document
 
-CS-Flow의 공식 document 입니다.  
+CS-Flow의 [공식 document](https://github.com/marco-rudolph/cs-flow)입니다.  
 환경 세팅 방법, 데이터 세팅 방법, 코드 실행 방법 등이 설명되어 있습니다.
 
-### 1-1) Getting Started
+### 1) Getting Started
 
 You will need [Python 3.6](https://www.python.org/downloads) and the packages specified in _requirements.txt_.
 We recommend setting up a [virtual environment with pip](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
@@ -19,7 +19,7 @@ Install packages with:
 $ pip install -r requirements.txt
 ```
 
-### 1-2) Configure and Run
+### 2) Configure and Run
 
 All configurations concerning data, model, training, visualization etc. can be made in _config.py_. The default configuration will run a training with paper-given parameters on the provided dummy dataset. This dataset contains images of 4 squares as normal examples and 4 circles as anomaly.
 
@@ -27,7 +27,7 @@ To extract features, run extract*features.py (this was already done here for the
 To start the training, just run \_main.py*!
 Please report us if you have issues when using the code.
 
-### 1-3) Data
+### 3) Data
 
 The given dummy dataset shows how the implementation expects the construction of a dataset. Coincidentally, the [MVTec AD dataset](https://www.mvtec.com/company/research/datasets/mvtec-ad) is constructed in this way.
 
@@ -84,11 +84,11 @@ cs-flow
                     └── ...
 ```
 
-### 1-4) Credits
+### 4) Credits
 
 Some code of an old version of the [FrEIA framework](https://github.com/VLL-HD/FrEIA) was used for the implementation of Normalizing Flows. Follow [their tutorial](https://github.com/VLL-HD/FrEIA) if you need more documentation about it.
 
-### 1-5) Citation
+### 5) Citation
 
 Please cite our paper in your publications if it helps your research. Even if it does not, you are welcome to cite us.
 
@@ -101,13 +101,13 @@ Please cite our paper in your publications if it helps your research. Even if it
         month = jan
         }
 
-### 1-6) License
+### 6) License
 
 This project is licensed under the MIT License.
 
-## 2. 변경 사항
+## 1-2. CS-Flow 변경 사항
 
-### 2-1) Anomaly Score 산출 방식 변경
+### 1) Anomaly Score 산출 방식 변경
 
 평균 -> 표준편차
 
@@ -123,7 +123,7 @@ score = np.std(z_concat ** 2 / 2, axis=(1, 2))
 
 참고 파일: [evaluate.py](https://github.com/skku-synapse/cs-flow/blob/afd9bfa58ee29e475b9f618969d08bf66fb444aa/evaluate.py#L170-L174), [train.py](https://github.com/skku-synapse/cs-flow/blob/afd9bfa58ee29e475b9f618969d08bf66fb444aa/train.py#L69-L73)
 
-### 2-2) 모델 저장 및 불러오기 방식 변경
+### 2) 모델 저장 및 불러오기 방식 변경
 
 전체 모델 저장 -> 모델 파라미터만 저장
 
@@ -140,7 +140,7 @@ model.load_state_dict(torch.load(path))
 
 참고 파일: [train.py](https://github.com/skku-synapse/cs-flow/blob/afd9bfa58ee29e475b9f618969d08bf66fb444aa/train.py#L93-L97), [model.py](https://github.com/skku-synapse/cs-flow/blob/afd9bfa58ee29e475b9f618969d08bf66fb444aa/model.py#L77-L82)
 
-### 2-3) configuration file 변경
+### 3) configuration file 변경
 
 | 변수명            | 설명                                                         | 기존 값    | 변경된 값  |
 | ----------------- | ------------------------------------------------------------ | ---------- | ---------- |
@@ -150,7 +150,7 @@ model.load_state_dict(torch.load(path))
 
 참고 파일: [config.py](https://github.com/skku-synapse/cs-flow/blob/main/config.py)
 
-## 3. hyper-parameters
+## 1-3. hyper-parameters
 
 | 변수명      | 설명                           | 값     |
 | ----------- | ------------------------------ | ------ |
@@ -161,14 +161,15 @@ model.load_state_dict(torch.load(path))
 
 참고 파일: [config.py](https://github.com/skku-synapse/cs-flow/blob/main/config.py)
 
-## 4. Data Augmentation
+# 2. Data Augmentation
 
-### 4-1) 적용 기법
+## 2-1. 적용 기법
 
-**Random Crop**  
+### Random Crop
+
 : 이미지를 일정한 크기로 랜덤하게 잘라 데이터를 증강시키는 기법
 
-### 4-2) 적용 방법
+## 2-2. 적용 방법
 
 SMT 데이터셋 raw 이미지(2560x1750)를 대상으로 Random Crop 진행
 
